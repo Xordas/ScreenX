@@ -20,7 +20,7 @@ ScreenX is a DIY telemetry display for the Moza ES Lite wheel. It streams Assett
 ### Hardware
 - Seeed Studio XIAO ESP32 (C6 recommended; C3/S3 supported)
 - 2.08" 256x64 SPI OLED (7-pin)
-- Jumper wires (if not using PCB)
+- Jumper wires
 
 ### Software
 - Windows 10/11
