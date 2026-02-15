@@ -245,3 +245,20 @@ Today was the first time it was ever used! Pretty exciting and it worked super w
 
   ### Companion App (Frontend)
    - No changes today
+
+---
+
+## 2/15/2026
+Today is the first release of ScreenX! Im really proud of this project and how far it has come since the original verison. I do find it a little sad I had to use some AI to reach my deadline but I think using a little bit of AI is better than having a app with terrible code.
+
+  ### Firmware (ESP32)
+   - Simple code review, minor fixes
+
+  ### Companion App (Backend)
+   - Simple code review, minor fixes
+     
+  ### Companion App (Frontend)
+   - Simple code review, minor fixes
+
+  ### Devlog?
+   - Thats right, most of the time I spent on the project today was updating the devlog to include a hardware journal, it took quite a while because as you can see it is quite detailed, I do feel bad for whoever has to read that.
