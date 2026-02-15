@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ScreenX</title>
+    <link rel="icon" type="image/x-icon" href="assets/logo.ico" />
+    <link rel="icon" type="image/png" href="assets/logo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="glow"></div>
+
+    <header class="intro">
+      <h1>ScreenX</h1>
+      <p class="intro-sub">
+        Add a 2.08" OLED telemetry display to your Moza ES steering wheel.
+        Real-time data from Assetto Corsa, streamed over WiFi, no permanent modifications required.
+      </p>
+      <div class="intro-actions">
+        <a href="docs.html" class="btn btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" /></svg>
+          Read the Docs
+        </a>
+        <a href="https://github.com/Xordas/ScreenX" class="btn btn-ghost" target="_blank">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.18 0 0 1-.33 3.3 1.23a11.5 11.5 0 0 1 6.02 0c2.28-1.56 3.29-1.23 3.29-1.23.66 1.66.25 2.88.12 3.18a4.65 4.65 0 0 1 1.24 3.22c0 4.61-2.8 5.63-5.48 5.92.43.37.82 1.1.82 2.22l-.01 3.29c0 .31.22.69.83.57A12 12 0 0 0 12 .3" /></svg>
+          GitHub
+        </a>
+      </div>
+    </header>
+
+    <main class="container">
+
+      <!-- Features -->
+      <section class="features" id="features">
+        <div class="feature-card">
+          <div class="feature-icon accent">
+            <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 12h4l3-9 4 18 3-9h4" /></svg>
+          </div>
+          <h3>Real-Time Telemetry</h3>
+          <p>Speed, RPM, gear, and more, streamed live from Assetto Corsa to your wheel-mounted display.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon green">
+            <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8.111 16.404a5.5 5.5 0 0 1 7.778 0M12 20h.01M2 8.82a15 15 0 0 1 20 0M5.09 12.773a10 10 0 0 1 13.82 0" /></svg>
+          </div>
+          <h3>WiFi Connected</h3>
+          <p>No extra wires to the PC. The ESP32 connects over your home network for a clean, wireless setup.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon yellow">
+            <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" /></svg>
+          </div>
+          <h3>Fully Reversible</h3>
+          <p>No permanent modifications to your wheel. Everything can be removed cleanly if you change your mind.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon purple">
+            <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4" /></svg>
+          </div>
+          <h3>Companion App</h3>
+          <p>One-click firmware flashing, WiFi setup, and a live telemetry dashboard, all from one desktop app.</p>
+        </div>
+      </section>
+
+      <section class="section" id="how-it-works">
+        <h2 class="section-title">How It Works</h2>
+        <p class="section-sub">The project has two components that work together.</p>
+        <div class="diagram">
+          <div class="diagram-node">
+            <span class="diagram-label">Assetto Corsa</span>
+            <span class="diagram-detail">Telemetry source</span>
+          </div>
+          <div class="diagram-arrow">&rarr;</div>
+          <div class="diagram-node highlight">
+            <span class="diagram-label">Companion App</span>
+            <span class="diagram-detail">Reads &amp; forwards data</span>
+          </div>
+          <div class="diagram-arrow">&rarr;</div>
+          <div class="diagram-node">
+            <span class="diagram-label">ESP32 + OLED</span>
+            <span class="diagram-detail">Displays on wheel</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="what-you-need">
+        <h2 class="section-title">What You Need</h2>
+        <p class="section-sub">Minimal hardware, no soldering required.</p>
+
+        <div class="req-grid">
+          <div class="req-item">
+            <h4>OLED Display</h4>
+            <p>2.08" 256&times;64 SPI OLED, 7-pin. <a href="https://a.co/d/026O8Ubb" target="_blank">Amazon &nearr;</a></p>
+          </div>
+          <div class="req-item">
+            <h4>Microcontroller</h4>
+            <p>Seeed Studio XIAO ESP32, <strong>C6 recommended</strong>. S3 and C3 also work. <a href="https://www.seeedstudio.com/Seeed-Studio-XIAO-ESP32C6-p-5884.html" target="_blank">Seeed Studio &nearr;</a></p>
+          </div>
+          <div class="req-item">
+            <h4>Jumper Wires</h4>
+            <p>Female-to-female wires for connecting the display. <a href="https://www.adafruit.com/product/1950" target="_blank">Adafruit &nearr;</a></p>
+          </div>
+          <div class="req-item">
+            <h4>Custom PCB <span class="tag">Coming Soon</span></h4>
+            <p>Optional. Taps into the wheel's power and removes the need for extra wires.</p>
+          </div>
+        </div>
+
+        <div style="text-align:center; margin-top:32px;">
+          <a href="docs.html" class="btn btn-primary">Full Setup Guide &rarr;</a>
+        </div><br>
+      </section>
+
+    <footer class="footer">
+      <p>ScreenX - Open-source sim racing hardware project.</p>
+      <p class="footer-links">
+        <a href="https://github.com/Xordas/ScreenX" target="_blank">GitHub</a>
+        <span class="dot">&middot;</span>
+        <a href="docs.html">Documentation</a>
+      </p>
+    </footer>  
+
+  </body>
+</html>

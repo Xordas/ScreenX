@@ -1,0 +1,591 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ScreenX</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="Glow"></div>
+
+    <!-- making a custom top bar with pywebview is actually so sick dude -->
+    <div class="TitleBar pywebview-drag-region">
+      <div class="TitleBarLeft">
+        <div class="TitleBarIcon">
+          <img src="logo.ico" alt="Logo" width="16" height="16" />
+        </div>
+        <span class="TitleBarText">ScreenX - Companion</span>
+      </div>
+      <div class="TitleBarControls">
+        <button id="WindowMinButton" class="WindowButton" aria-label="Minimize">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12" /></svg>
+        </button>
+        <button id="WindowMaxButton" class="WindowButton" aria-label="Maximize">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="5" width="14" height="14"/></svg>
+        </button>
+        <button id="WindowCloseButton" class="WindowButton Danger" aria-label="Close">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6" /></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <nav class="SideBar">
+      <div class="SideBarName">
+        <div class="Icon">
+          <img src="logo.ico" alt="Logo" width="22" height="22"/>
+        </div>
+        <span class="Name">ScreenX</span>
+      </div>
+
+      <div class="SideBarNav">
+        <button class="NavOption Active" data-view="onboarding">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+          </svg>
+          <span>Setup</span>
+        </button>
+        <button class="NavOption" data-view="flash">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+          </svg>
+          <span>Flash</span>
+        </button>
+        <button class="NavOption" data-view="wifi">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12.55a11 11 0 0 1 14.08 0"/>
+            <path d="M1.42 9a16 16 0 0 1 21.16 0"/>
+            <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>
+            <line x1="12" y1="20" x2="12.01" y2="20"/>
+          </svg>
+          <span>WiFi</span>
+        </button>
+        <button class="NavOption" data-view="telemetry">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="20" x2="18" y2="10"/>
+            <line x1="12" y1="20" x2="12" y2="4"/>
+            <line x1="6" y1="20" x2="6" y2="14"/>
+          </svg>
+          <span>Dashboard</span>
+        </button>
+        <button class="NavOption" data-view="customize">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="9"/>
+            <rect x="14" y="3" width="7" height="5"/>
+            <rect x="14" y="12" width="7" height="9"/>
+            <rect x="3" y="16" width="7" height="5"/>
+          </svg>
+          <span>Customize</span>
+        </button>
+      </div>
+
+      <div class="SideBarFooter">
+        <span class="Version">v1.0.0</span>
+      </div>
+    </nav>
+
+    <!-- Main content -->
+    <main class="MainArea">
+
+      <!-- Onboarding and setup stuff -->
+      <section id="Onboarding" class="View">
+        <div class="ViewHeader">
+          <h1>Device Setup</h1>
+          <p class="ViewDescription">Get your wheel display running in three quick steps.</p>
+        </div>
+
+        <!-- Steps -->
+        <div class="Steps">
+          <div class="StepsStep Active" data-step-indicator="0">
+            <div class="StepsDot"><span>1</span></div>
+            <span class="StepsLabel">Connect</span>
+          </div>
+          <div class="StepsLine"></div>
+          <div class="StepsStep" data-step-indicator="1">
+            <div class="StepsDot"><span>2</span></div>
+            <span class="StepsLabel">Flash</span>
+          </div>
+          <div class="StepsLine"></div>
+          <div class="StepsStep" data-step-indicator="2">
+            <div class="StepsDot"><span>3</span></div>
+            <span class="StepsLabel">WiFi</span>
+          </div>
+        </div>
+
+        <div class="Card StepCard" data-step="0">
+          <div class="CardIcon CardIconAccentBlue">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="4" y="4" width="16" height="16" rx="2" ry="2"/>
+              <rect x="9" y="9" width="6" height="6"/>
+              <line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/>
+              <line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/>
+              <line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/>
+              <line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/>
+            </svg>
+          </div>
+          <h2>Connect Your Device</h2>
+          <p class="CardDescription">Plug in your ESP32, make sure its in bootloader mode. We'll auto-detect the serial port.</p>
+          <div class="Controlls">
+            <button id="DetectButton" class="Button Primary">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
+              Detect Device
+            </button>
+            <div id="DetectStatus" class="StatusIcon Idle">Waiting for device</div>
+          </div>
+          <div class="ManualPick">
+            <button id="ManualButton" class="Button Ghost Small">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+              Select port manually
+            </button>
+            <div id="ManualPortPanel" class="ManualPanel Hidden">
+              <label class="Field">
+                <span class="FieldLabel">Available Ports</span>
+                <select id="ManualPortSelect" class="Input"></select>
+              </label>
+              <button id="ManualConfirm" class="Button Primary Small">Use this port</button>
+            </div>
+          </div>
+
+          <div class="StepFooter">
+            <button id="ContinueFlash" class="Button NextButton" disabled>
+              Continue
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19" /></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="Card StepCard Hidden" data-step="1">
+          <div class="CardIcon CardAccentYellow">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+            </svg>
+          </div>
+          <h2>Flash Firmware</h2>
+          <p class="CardDescription">Select a compiled <code>.bin</code> file.</p>
+          <div class="Callout Warning">
+            Put the device into bootloader mode before flashing.
+          </div>
+
+          <div class="FileDrop" id="DropZoneOne">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            <span class="DropText">Drop .bin here or <label for="FirmwareFile" class="FileLink">browse</label></span>
+            <span class="DropName" id="FileNameOne"></span>
+            <input id="FirmwareFile" type="file" accept=".bin" hidden />
+          </div>
+
+          <div class="Controlls">
+            <button id="FlashButton" class="Button Primary">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              Flash
+            </button>
+            <div id="FlashStatus" class="StatusIcon Idle">Ready</div>
+          </div>
+
+          <div class="ProgressWrap Hidden" id="FlashProgressOne">
+            <div class="ProgressTrack"><div class="ProgressFill" id="ProgressFillOne"></div></div>
+          </div>
+
+          <details class="Advanced">
+            <summary>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+              Advanced
+            </summary>
+            <div class="AdvancedGrid">
+              <label class="Field"><span class="FieldLabel">Port</span><select id="FlashPort" class="Input"></select></label>
+              <label class="Field"><span class="FieldLabel">Baud</span><input id="FlashBaud" class="Input" value="460800" /></label>
+              <label class="Field"><span class="FieldLabel">Chip</span>
+                <select id="FlashChip" class="Input">
+                  <option value="esp32c6">ESP32-C6</option>
+                  <option value="esp32c3">ESP32-C3</option>
+                  <option value="esp32s3">ESP32-S3</option>
+                </select>
+              </label>
+              <div class="Field"><span class="FieldLabel">&nbsp;</span><button id="RefreshPortsOne" class="Button Ghost Small">Refresh</button></div>
+            </div>
+          </details>
+
+          <div class="StepNav">
+            <button class="Button Ghost BackButton" id="BackToConnectButton">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+              Back
+            </button>
+            <button id="ContinueWifi" class="Button NextButton" disabled>
+              Continue
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="Card StepCard Hidden" data-step="2">
+          <div class="CardIcon CardAccentGreen">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12.55a11 11 0 0 1 14.08 0"/>
+              <path d="M1.42 9a16 16 0 0 1 21.16 0"/>
+              <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>
+              <line x1="12" y1="20" x2="12.01" y2="20"/>
+            </svg>
+          </div>
+          <h2>WiFi Credentials</h2>
+          <p class="CardDescription">Send your network credentials to the device over USB serial.</p>
+          <div class="Callout Info">
+            Before sending WiFi credentials, unplug the device and plug it back in. You should see a "Waiting for wifi credentials" message on the display.
+          </div>
+
+          <div class="FormGrid">
+            <label class="Field">
+              <span class="FieldLabel">Network Name (SSID)</span>
+              <input id="WifiSsid" class="Input" placeholder="MyWifiNetwork" autocomplete="off" />
+            </label>
+            <label class="Field">
+              <span class="FieldLabel">Password</span>
+              <div class="PasswordWrap">
+                <input id="WifiPassword" class="Input" placeholder="Enter password" type="password" autocomplete="off"/>
+                <button class="PasswordEye" type="button" data-target="WifiPassword" tabindex="-1">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                </button>
+              </div>
+            </label>
+          </div>
+
+          <div class="Controlls">
+            <button id="WifiSend" class="Button Primary">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              Send Credentials
+            </button>
+            <div id="WifiStatus" class="StatusIcon Idle">Waiting</div>
+          </div>
+
+          <details class="Advanced">
+            <summary>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+              Advanced
+            </summary>
+            <div class="AdvancedGrid">
+              <label class="Field"><span class="FieldLabel">Port</span><select id="WifiPort" class="Input"></select></label>
+              <label class="Field"><span class="FieldLabel">Baud</span><input id="WifiBaud" class="Input" value="115200" /></label>
+              <div class="Field"><span class="FieldLabel">&nbsp;</span><button id="RefreshPortsTwo" class="Button Ghost Small">Refresh</button></div>
+            </div>
+          </details>
+
+          <div class="StepNav">
+            <button class="Button Ghost BackButton" id="BackToFlashButton">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+              Back
+            </button>
+            <button id="FinishOnboardingButton" class="Button Primary FinishButton">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              Finish Setup
+            </button>
+          </div>
+        </div>
+        <div class="Card LogCard">
+          <div class="LogHeader">
+            <h3>Activity Log</h3>
+            <button class="Button Ghost Small" id="ClearLogButton">Clear</button>
+          </div>
+          <pre id="LogOutput" class="LogOutput"></pre>
+        </div>
+      </section>
+
+      <section id="ViewFlash" class="View Hidden">
+        <div class="ViewHeader">
+          <h1>Firmware</h1>
+          <p class="ViewDescription">Flash firmware directly to your ESP32.</p>
+        </div>
+        <div class="Callout Warning">
+          Put the device into bootloader mode before flashing.
+        </div>
+        <div class="Card">
+          <div class="FileDrop" id="DropZoneTwo">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            <span class="DropText">Drop .bin here or <label for="FirmwareFileTwo" class="FileLink">browse</label></span>
+            <span class="DropName" id="FileNameTwo"></span>
+            <input id="FirmwareFileTwo" type="file" accept=".bin" hidden />
+          </div>
+          <div class="FormGrid ColsThree">
+            <label class="Field"><span class="FieldLabel">Port</span><select id="FlashPortTwo" class="Input"></select></label>
+            <label class="Field"><span class="FieldLabel">Baud Rate</span><input id="FlashBaudTwo" class="Input" value="460800" /></label>
+            <label class="Field"><span class="FieldLabel">Chip</span>
+              <select id="FlashChipTwo" class="Input">
+                <option value="esp32c6">ESP32-C6</option>
+                <option value="esp32c3">ESP32-C3</option>
+                <option value="esp32s3">ESP32-S3</option>
+              </select>
+            </label>
+          </div>
+          <div class="Controlls">
+            <button id="FlashButtonTwo" class="Button Primary">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              Flash Firmware
+            </button>
+            <button id="RefreshPortsThree" class="Button Ghost Small">Refresh Ports</button>
+            <div id="FlashStatusTwo" class="StatusIcon Idle">Ready</div>
+          </div>
+          <div class="ProgressWrap Hidden" id="FlashProgressTwo">
+            <div class="ProgressTrack"><div class="ProgressFill" id="ProgressFillTwo"></div></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="ViewWifi" class="View Hidden">
+        <div class="ViewHeader">
+          <h1>WiFi</h1>
+          <p class="ViewDescription">Send network credentials to your device over serial.</p>
+        </div>
+        <div class="Callout Info">
+            Before sending WiFi credentials, unplug the device and plug it back in. You should see a "Waiting for wifi credentials" message on the display.
+        </div>
+        <div class="Card">
+          <div class="FormGrid">
+            <label class="Field"><span class="FieldLabel">Network Name (SSID)</span><input id="WifiSsidTwo" class="Input" placeholder="e.g. MyHomeWiFi" /></label>
+            <label class="Field"><span class="FieldLabel">Password</span>
+              <div class="PasswordWrap">
+                <input id="WifiPasswordTwo" class="Input" placeholder="Enter password" type="password" />
+                <button class="PasswordEye" type="button" data-target="WifiPasswordTwo" tabindex="-1">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                </button>
+              </div>
+            </label>
+            <label class="Field"><span class="FieldLabel">Port</span><select id="WifiPortTwo" class="Input"></select></label>
+            <label class="Field"><span class="FieldLabel">Baud Rate</span><input id="WifiBaudTwo" class="Input" value="115200" /></label>
+          </div>
+          <div class="Controlls">
+            <button id="WifiSendTwo" class="Button Primary">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              Send Credentials
+            </button>
+            <div id="WifiStatusTwo" class="StatusIcon Idle">Waiting</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="ViewTelemetry" class="View Hidden">
+        <div class="ViewHeader">
+          <h1>Dashboard</h1>
+        </div>
+        <div id="DeviceDisconnect" class="Alert Error Hidden">Disconnected from device</div>
+        <div class="Card ConnectionBar">
+          <div class="ConnectionFields">
+            <label class="Field Compact"><span class="FieldLabel">ESP32 IP</span><input id="TelemetryIp" class="Input" value="192.168.1.1" /></label>
+            <label class="Field Compact"><span class="FieldLabel">Port</span><input id="TelemetryPort" class="Input" value="8888" /></label>
+          </div>
+          <div class="ConnectionActions">
+            <button id="TelemetryStartButton" class="Button Primary Small">Start</button>
+            <button id="TelemetryStopButton" class="Button Ghost Small">Stop</button>
+            <div id="TelemetryStatus" class="StatusIcon Idle">Idle</div>
+          </div>
+        </div>
+
+        <div class="Card OledCard">
+          <div class="OledBezel">
+            <canvas id="OledCanvas"></canvas>
+          </div>
+        </div>
+
+        <!-- Dashboard grid -->
+         <!-- Not all of these are shown all the time, I probably should make them dynamic but im lazy -->
+        <div class="DashGrid">
+          <div class="DashCard TireCard" data-widget="Tires">
+            <span class="DashLabel">Tire Wear</span>
+            <div class="TireGrid">
+              <div class="Tire" id="TireFl"><span class="TirePosition">FL</span><span class="TirePercent">-</span></div>
+              <div class="Tire" id="TireFr"><span class="TirePosition">FR</span><span class="TirePercent">-</span></div>
+              <div class="Tire" id="TireRl"><span class="TirePosition">RL</span><span class="TirePercent">-</span></div>
+              <div class="Tire" id="TireRr"><span class="TirePosition">RR</span><span class="TirePercent">-</span></div>
+            </div>
+          </div>
+          <div class="DashCard GearCard" data-widget="gear">
+            <span class="DashLabel">Gear</span>
+            <strong class="DashBig" id="StatGear">N</strong>
+          </div>
+          <div class="DashCard" data-widget="speed">
+            <span class="DashLabel">Speed</span>
+            <strong class="DashValue" id="StatSpeed">0</strong>
+            <span class="DashUnit">km/h</span>
+          </div>
+          <div class="DashCard" data-widget="rpm">
+            <span class="DashLabel">RPM</span>
+            <strong class="DashValue" id="StatRpm">0</strong>
+          </div>
+          <div class="DashCard BarCard" data-widget="throttle">
+            <span class="DashLabel">Throttle</span>
+            <div class="DashBarRow">
+              <div class="DashBarTrack"><div class="DashBarFill ThrottleFill" id="BarThrottle" style="width:0%"></div></div>
+              <span class="DashBarPercent" id="StatThrottle">0%</span>
+            </div>
+          </div>
+          <div class="DashCard BarCard" data-widget="brake">
+            <span class="DashLabel">Brake</span>
+            <div class="DashBarRow">
+              <div class="DashBarTrack"><div class="DashBarFill BrakeFill" id="BarBrake" style="width:0%"></div></div>
+              <span class="DashBarPercent" id="StatBrake">0%</span>
+            </div>
+          </div>
+          <div class="DashCard BarCard" data-widget="clutch">
+            <span class="DashLabel">Clutch</span>
+            <div class="DashBarRow">
+              <div class="DashBarTrack"><div class="DashBarFill ClutchFill" id="BarClutch" style="width:0%"></div></div>
+              <span class="DashBarPercent" id="StatClutch">0%</span>
+            </div>
+          </div>
+          <div class="DashCard" data-widget="pit">
+            <span class="DashLabel">Pit Limiter</span>
+            <strong class="DashValue" id="StatPit">OFF</strong>
+            <div class="DashDot" id="IndPit"></div>
+          </div>
+          <div class="DashCard" data-widget="abs_tc">
+            <span class="DashLabel">ABS</span>
+            <strong class="DashValue" id="StatAbs">OFF</strong>
+            <div class="DashDot" id="IndAbs"></div>
+          </div>
+          <div class="DashCard" data-widget="abs_tc">
+            <span class="DashLabel">TC</span>
+            <strong class="DashValue" id="StatTc">OFF</strong>
+            <div class="DashDot" id="IndTc"></div>
+          </div>
+          <div class="DashCard" data-widget="drs">
+            <span class="DashLabel">DRS</span>
+            <strong class="DashValue" id="StatDrs">OFF</strong>
+            <div class="DashDot" id="IndDrs"></div>
+          </div>
+          <div class="DashCard BarCard" data-widget="fuel">
+            <span class="DashLabel">Fuel</span>
+            <div class="DashBarRow">
+              <div class="DashBarTrack"><div class="DashBarFill FuelFill" id="BarFuel" style="width:0%"></div></div>
+              <span class="DashBarPercent" id="StatFuel">0 L</span>
+            </div>
+          </div>
+          <div class="DashCard" data-widget="boost">
+            <span class="DashLabel">Turbo</span>
+            <strong class="DashValue" id="StatBoost">0.00</strong>
+            <span class="DashUnit">bar</span>
+          </div>
+          <div class="DashCard" data-widget="air_temp">
+            <span class="DashLabel">Air Temp</span>
+            <strong class="DashValue" id="StatAirTemp">0</strong>
+            <span class="DashUnit">°C</span>
+          </div>
+          <div class="DashCard" data-widget="road_temp">
+            <span class="DashLabel">Road Temp</span>
+            <strong class="DashValue" id="StatRoadTemp">0</strong>
+            <span class="DashUnit">°C</span>
+          </div>
+          <div class="DashCard" data-widget="brake_temp">
+            <span class="DashLabel">Brake Temp</span>
+            <strong class="DashValue" id="StatBrakeTemp">0</strong>
+            <span class="DashUnit">°C</span>
+          </div>
+          
+        </div>
+      </section>
+
+      <!-- Customization -->
+      <section id="ViewCustomize" class="View Hidden">
+        <div class="ViewHeader">
+          <h1>Display Customization</h1>
+        </div>
+        <!-- Let people know some layouts dont work (though i think this is mostly fixed and no longer the case) -->
+        <div class="LayoutNotice">
+          <span>Some widget combinations may not display perfectly together due to the small size of the screen.</span>
+        </div>
+        <div class="Card OledCard">
+          <div class="OledHeader">
+            <span class="DashLabel">Layout Preview</span>
+          </div>
+          <div class="OledBezel">
+            <canvas id="LayoutCanvas"></canvas>
+          </div>
+          <div class="ZoneLabels">
+            <span>Left</span>
+            <span class="ZoneLabelsMid">Middle</span>
+            <span>Right</span>
+          </div>
+        </div>
+        <div class="ZoneGrid">
+          <div class="Card ZoneCard" data-zone="left">
+            <div class="ZoneHeader">
+              <div class="ZoneBadge">L</div>
+              <div>
+                <h2>Left Zone</h2>
+              </div>
+            </div>
+            <label class="Field">
+              <span class="FieldLabel">Primary Widget</span>
+              <select id="LeftZonePrimary" class="Input ZoneSelect" data-zone="left" data-slot="primary"></select>
+            </label>
+            <label class="Field">
+              <span class="FieldLabel">Secondary</span>
+              <select id="LeftZoneSecondary" class="Input ZoneSelect" data-zone="left" data-slot="secondary"></select>
+            </label>
+          </div>
+          <div class="Card ZoneCard" data-zone="middle">
+            <div class="ZoneHeader">
+              <div class="ZoneBadge Accent">M</div>
+              <div>
+                <h2>Middle Zone</h2>
+              </div>
+            </div>
+            <label class="Field">
+              <span class="FieldLabel">Primary Widget</span>
+              <select id="MidZonePrimary" class="Input ZoneSelect" data-zone="middle" data-slot="primary"></select>
+            </label>
+            <label class="Field">
+              <span class="FieldLabel">Secondary</span>
+              <select id="MidZoneSecondary" class="Input ZoneSelect" data-zone="middle" data-slot="secondary"></select>
+            </label>
+          </div>
+          <div class="Card ZoneCard" data-zone="right">
+            <div class="ZoneHeader">
+              <div class="ZoneBadge">R</div>
+              <div>
+                <h2>Right Zone</h2>
+              </div>
+            </div>
+            <label class="Field">
+              <span class="FieldLabel">Primary Widget</span>
+              <select id="RightZonePrimary" class="Input ZoneSelect" data-zone="right" data-slot="primary"></select>
+            </label>
+            <label class="Field">
+              <span class="FieldLabel">Secondary</span>
+              <select id="RightZoneSecondary" class="Input ZoneSelect" data-zone="right" data-slot="secondary"></select>
+            </label>
+          </div>
+        </div>
+        <div class="Card PresetCard">
+          <div class="PresetHeader">
+            <h3>Presets</h3>
+          </div>
+          <div class="PresetRow">
+            <select id="PresetSelect" class="Input PresetSelect"></select>
+            <button id="PresetLoad" class="Button Ghost Small">Load</button>
+            <button id="PresetDelete" class="Button Ghost Small">Delete</button>
+          </div>
+          <div class="PresetRow">
+            <input id="PresetName" class="Input" placeholder="New preset name" />
+            <button id="PresetSave" class="Button Primary Small">Save Preset</button>
+          </div>
+        </div>
+        <div class="Card">
+          <div class="Controlls">
+            <button id="SendLayout" class="Button Primary">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              Send Layout to ESP32
+            </button>
+            <div id="LayoutSendStatus" class="StatusIcon Idle">Ready</div>
+          </div>
+          <p class="Hint">Sends the zone configuration to the connected ESP32, make sure its connected over wifi, not USB.</p>
+        </div>
+      </section>
+    </main>
+    <div id="Alerts" class="Alerts"></div>
+
+    <script src="oled-preview.js"></script>
+    <script src="app.js"></script>
+        
+  </body>
+</html>
+

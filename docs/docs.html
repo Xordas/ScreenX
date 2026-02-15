@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ScreenX - Docs</title>
+    <link rel="icon" type="image/x-icon" href="assets/logo.ico" />
+    <link rel="icon" type="image/png" href="assets/logo.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="docs.css" />
+  </head>
+  <body>
+    <div class="glow"></div>
+
+    <!-- Top bar -->
+    <header class="docs-topbar">
+      <a href="index.html" class="docs-brand">
+        <img src="assets/logo.ico" alt="Logo" width="20" height="20"/>
+        <span>ScreenX</span>
+      </a>
+      <nav class="docs-topnav">
+        <a href="index.html">Home</a>
+        <a href="docs.html" class="active">Docs</a>
+        <a href="https://github.com/Xordas/ScreenX" target="_blank">GitHub</a>
+      </nav>
+      <button class="docs-menu-toggle" id="menuToggle" aria-label="Toggle menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18" /></svg>
+      </button>
+    </header>
+
+    <div class="docs-layout">
+      <aside class="docs-sidebar" id="docsSidebar">
+        <nav class="docs-nav">
+          <div class="docs-nav-group">
+            <span class="docs-nav-heading">Getting Started</span>
+            <a href="#installation" class="docs-nav-link active" data-section="installation">Installation</a>
+            <a href="#setup" class="docs-nav-link" data-section="setup">Initial Setup</a>
+          </div>
+          <div class="docs-nav-group">
+            <span class="docs-nav-heading">Hardware</span>
+            <a href="#hardware-requirements" class="docs-nav-link" data-section="hardware-requirements">Requirements</a>
+            <a href="#wiring" class="docs-nav-link" data-section="wiring">Wiring (No PCB)</a>
+            <a href="#pcb-install" class="docs-nav-link" data-section="pcb-install">PCB Install</a>
+            <a href="#screen-mounting" class="docs-nav-link" data-section="screen-mounting">Screen Mounting</a>
+          </div>
+          <div class="docs-nav-group">
+            <span class="docs-nav-heading">Reference</span>
+            <a href="#troubleshooting" class="docs-nav-link" data-section="troubleshooting">Troubleshooting</a>
+          </div>
+        </nav>
+      </aside>
+
+      <main class="docs-content">
+        <section class="docs-section" id="installation">
+          <h1>Installation</h1>
+          <p class="docs-lead">Download the companion app and get up and running in under a minute.</p>
+
+          <div class="docs-steps">
+            <div class="docs-step">
+              <span class="docs-step-num">1</span>
+              <div>
+                <h4>Go to the GitHub page</h4>
+                <p>Navigate to the project's <a href="https://github.com/Xordas/ScreenX" target="_blank">GitHub repository</a>.</p>
+              </div>
+            </div>
+            <div class="docs-step">
+              <span class="docs-step-num">2</span>
+              <div>
+                <h4>Open the Releases tab</h4>
+                <p>Click on <strong>Releases</strong> in the right-hand sidebar of the repository.</p>
+              </div>
+            </div>
+            <div class="docs-step">
+              <span class="docs-step-num">3</span>
+              <div>
+                <h4>Download the latest release</h4>
+                <p>Find the most recent release and click <code>ScreenX-Companion.exe</code> to download it.</p>
+              </div>
+            </div>
+            <div class="docs-step">
+              <span class="docs-step-num">4</span>
+              <div>
+                <h4>Run the companion app</h4>
+                <p>Once downloaded, open the companion application. The onboarding process will guide you through the rest.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="docs-callout">
+            <div>
+              <strong>Running from source?</strong>
+              <p>You can also run the companion directly with Python:</p>
+              <div class="code-block">
+                <span class="code-prompt">$</span> cd companion<br/>
+                <span class="code-prompt">$</span> pip install -r requirements.txt<br/>
+                <span class="code-prompt">$</span> python companion.py
+              </div>
+            </div>
+          </div>
+
+        <div class="docs-callout">
+            <div>
+              <strong>What about building from source?</strong>
+              <p>You can build the app from source to run it just as easily!</p>
+              <div class="code-block">
+                <span class="code-prompt">$</span> cd companion<br/>
+                <span class="code-prompt">$</span> pip install -r requirements.txt<br />
+                <span class="code-prompt">$</span> pip install pyinstaller<br/>
+                <span class="code-prompt">$</span> pyinstaller companion.spec
+              </div>
+            </div>
+          </div>
+        </section><br>
+
+
+        <section class="docs-section" id="setup">
+          <h1>Initial Setup</h1>
+          <p class="docs-lead">Walk through the onboarding wizard in the companion app.</p>
+          <div class="docs-steps">
+            <div class="docs-step">
+              <span class="docs-step-num">1</span>
+              <div>
+                <h4>Open the companion app</h4>
+                <p>The onboarding should start automatically on first launch.</p>
+              </div>
+            </div>
+            <div class="docs-step">
+              <span class="docs-step-num">2</span>
+              <div>
+                <h4>Detect your device</h4>
+                <p>Click <strong>Detect Device</strong> to auto-detect the COM port your ESP32 is connected to. If the detected port is incorrect, click <em>Select port manually</em> instead.</p>
+              </div>
+            </div>
+            <div class="docs-step">
+              <span class="docs-step-num">3</span>
+              <div>
+                <h4>Flash firmware</h4>
+                <p>On the firmware step, choose between manually uploading a <code>.bin</code> file or having it fetched automatically (Coming soon after release). Click <strong>Flash</strong> and wait for it to complete.</p>
+              </div>
+            </div>
+            <div class="docs-step">
+              <span class="docs-step-num">4</span>
+              <div>
+                <h4>Reconnect the device</h4>
+                <p>Once flashing is done, <strong>unplug and re-plug</strong> the ESP32, then proceed to the next step.</p>
+              </div>
+            </div>
+            <div class="docs-step">
+              <span class="docs-step-num">5</span>
+              <div>
+                <h4>Send WiFi credentials</h4>
+                <p>Enter the WiFi network name and password you want the ESP32 to connect to. The screen should display <em>"Saving…"</em>, then restart and show its local IP address.</p>
+              </div>
+            </div>
+            <div class="docs-step">
+              <span class="docs-step-num">6</span>
+              <div>
+                <h4>Enter the IP in the Dashboard</h4>
+                <p>In the companion app's <strong>Dashboard</strong> tab, enter the IP address shown on the ESP32's screen. Leave the port as the default unless you're running custom firmware.</p>
+              </div>
+            </div>
+            <div class="docs-step">
+              <span class="docs-step-num">7</span>
+              <div>
+                <h4>Start racing</h4>
+                <p>The app will auto-detect when Assetto Corsa is open and begin sending telemetry data to the ESP32.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="docs-section" id="hardware-requirements">
+          <h1>Hardware Requirements</h1>
+          <p class="docs-lead">This project requires minimal off-the-shelf hardware.</p>
+          <div class="docs-parts-grid">
+            <div class="docs-part">
+              <h4>XIAO ESP32</h4>
+              <p>C6 <em>(recommended)</em>, C3, or S3 variant. The C6 and C3 are recommended because of their internal antenna.</p>
+              <a href="https://www.seeedstudio.com/Seeed-Studio-XIAO-ESP32C6-p-5884.html" target="_blank" class="docs-part-link">Seeed Studio &nearr;</a>
+            </div>
+            <div class="docs-part">
+              <h4>256&times;64 OLED Display</h4>
+              <p>2.08-inch, 7-pin SPI interface. Make sure it runs on 3.3&nbsp;V logic.</p>
+              <a href="https://a.co/d/026O8Ubb" target="_blank" class="docs-part-link">Amazon &nearr;</a>
+            </div>
+            <div class="docs-part">
+              <h4>Jumper Wires</h4>
+              <p>Female-to-female jumper wires for connecting the display to the ESP32.</p>
+              <a href="https://www.adafruit.com/product/1950" target="_blank" class="docs-part-link">Adafruit &nearr;</a>
+            </div>
+            <div class="docs-part">
+              <h4>Custom PCB <span class="tag">Coming Soon</span></h4>
+              <p>Optional. Replaces jumper wires and taps into the wheel's own power supply with a built-in voltage regulator.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="docs-section" id="wiring">
+          <h1>Wiring (Without PCB)</h1>
+          <p class="docs-lead">Connect the OLED display to your XIAO ESP32 using the pinout below. You will need to provide your own power source for the ESP32.</p>
+
+          <table class="pin-table">
+            <thead><tr><th>Display Pin</th><th>ESP32 Pin</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td>CS</td><td>D3</td><td>Chip select</td></tr>
+              <tr><td>DC</td><td>D6</td><td>Data / command</td></tr>
+              <tr><td>RESET</td><td>D2</td><td>Display reset</td></tr>
+              <tr><td>SDA</td><td>D10</td><td>SPI data (MOSI)</td></tr>
+              <tr><td>SCL</td><td>D8</td><td>SPI clock (SCK)</td></tr>
+              <tr><td>VCC</td><td>3V3</td><td>3.3 V power</td></tr>
+              <tr><td>GND</td><td>GND</td><td>Ground</td></tr>
+            </tbody>
+          </table>
+
+          <p style="margin-top: 16px; color: var(--text-2); font-size: .9rem;">Mount the ESP32 wherever suits your DIY setup. You'll need to source your own power, for example, a small LiPo battery or USB power bank.</p>
+        </section>
+
+        <section class="docs-section" id="pcb-install">
+          <h1>PCB Installation</h1>
+          <p class="docs-lead">Step-by-step guide for installing with the custom PCB. <span class="tag">Coming Soon</span></p>
+          <div class="docs-steps">
+            <div class="docs-step">
+              <span class="docs-step-num">1</span>
+              <div>
+                <h4>Open the wheel</h4>
+                <p>Remove the Moza ES wheel from the base. Unscrew the 6 screws on the front face. Be careful, the wheel will come apart once these are removed.</p>
+              </div>
+            </div>
+            <div class="docs-step">
+              <span class="docs-step-num">2</span>
+              <div>
+                <h4>Disconnect internals</h4>
+                <p>Gently remove the quick release hub and unplug the internal connector inside the wheel.</p>
+              </div>
+            </div>
+            <div class="docs-step">
+              <span class="docs-step-num">3</span>
+              <div>
+                <h4>Mount the ESP32 on the PCB</h4>
+                <p>Insert your ESP32 into the PCB, making sure the pin labels line up. The USB port should face <strong>away</strong> from the long edge of the PCB. Firmware should already be flashed.</p>
+              </div>
+            </div>
+            <div class="docs-step">
+              <span class="docs-step-num">4</span>
+              <div>
+                <h4>Connect the screen</h4>
+                <p>Plug in the display cables to the PCB, matching the pinout labels.</p>
+              </div>
+            </div>
+            <div class="docs-step">
+              <span class="docs-step-num">5</span>
+              <div>
+                <h4>Connect the quick release hub</h4>
+                <p>Plug the connector from the quick release hub into the PCB.</p>
+              </div>
+            </div>
+            <div class="docs-step">
+              <span class="docs-step-num">6</span>
+              <div>
+                <h4>Install the PCB into the wheel</h4>
+                <p>Slide the PCB into the wheel and press the bottom connector into the existing connector inside the wheel. Optionally tie string through the PCB holes for easy removal later.</p>
+              </div>
+            </div>
+            <div class="docs-step">
+              <span class="docs-step-num">7</span>
+              <div>
+                <h4>Route cables &amp; reassemble</h4>
+                <p>Place the 3D-printed spacer on the back of the wheel and route cables through it. Reassemble the wheel, making sure no cables are pinched. When reconnected to the base, the screen should power on automatically.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="docs-section" id="screen-mounting">
+          <h1>Screen Mounting</h1>
+          <p class="docs-lead">Attach the display to the top of your steering wheel.</p>
+          <div class="docs-callout">
+            <div>
+              <strong>Official mount coming soon.</strong>
+              <p>Our 3D-printed mount is still in development. In the meantime, you can design your own for your own wheel, this project isnt limited to just the Moza ES Lite!</p>
+            </div>
+          </div>
+          <div class="docs-steps">
+            <div class="docs-step">
+              <span class="docs-step-num">1</span>
+              <div>
+                <h4>Insert the screen into the mount</h4>
+                <p>Place the OLED display into your mount and secure it with screws.</p>
+              </div>
+            </div>
+            <div class="docs-step">
+              <span class="docs-step-num">2</span>
+              <div>
+                <h4>Attach to the wheel</h4>
+                <p>Use a mild adhesive (nothing too permanent) to stick the mount to the top of the wheel. This should be compatible with most ES Lite wheel mods that do not expand on the top of the wheel.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="docs-section" id="troubleshooting">
+          <h1>Troubleshooting</h1>
+          <p class="docs-lead">Common issues and how to fix them.</p>
+          <div class="faq">
+            <details>
+              <summary>Assetto Corsa crashes on launch</summary>
+              <p>Try closing the companion app and only re-opening it once the game has fully loaded. This was a known bug that has since been patched. If it still occurs, please <a href="https://github.com/Xordas/ScreenX" target="_blank">open an issue</a> on GitHub.</p>
+            </details>
+            <details>
+              <summary>The ESP32 isn't displaying telemetry data</summary>
+              <p>Confirm that Assetto Corsa is running and the IP address in the companion app matches the one shown on the ESP32's screen. Try driving around for a few seconds, data may take a moment to start flowing.</p>
+            </details>
+            <details>
+              <summary>Firmware flashing fails</summary>
+              <p>Make sure nothing else is using the COM port (e.g. Arduino IDE's Serial Monitor). Close any conflicting applications and try again. Ensure the device is in bootloader mode.</p>
+            </details>
+            <details>
+              <summary>No IP address on the screen after WiFi setup</summary>
+              <p>The ESP32 hasn't connected to your WiFi. Re-run the WiFi setup in the companion app and double-check your SSID and password. Make sure your network supports 2.4 GHz (5 GHz is not supported).</p>
+            </details>
+            <details>
+              <summary>Companion app can't detect the ESP32</summary>
+              <p>Try a different USB cable, some are charge only and don't carry data. You can also select the COM port manually in the app.</p>
+            </details>
+          </div>
+        </section>
+
+        <footer class="docs-footer">
+          <p>ScreenX - Open-source sim racing hardware.</p>
+          <p class="footer-links">
+            <a href="index.html">Home</a>
+            <span class="dot">&middot;</span>
+            <a href="https://github.com/Xordas/ScreenX" target="_blank">GitHub</a>
+          </p>
+        </footer>
+      </main>
+    </div>
+
+    <script>
+      const toggle = document.getElementById('menuToggle');
+      const sidebar = document.getElementById('docsSidebar');
+      toggle.addEventListener('click', () => sidebar.classList.toggle('open'));
+
+      const sections = document.querySelectorAll('.docs-section');
+      const navLinks = document.querySelectorAll('.docs-nav-link');
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            navLinks.forEach(l => l.classList.remove('active'));
+            const link = document.querySelector(`.docs-nav-link[data-section="${entry.target.id}"]`);
+            if (link) link.classList.add('active');
+          }
+        });
+      }, { rootMargin: '-80px 0px -60% 0px', threshold: 0 });
+
+      sections.forEach(s => observer.observe(s));
+
+      navLinks.forEach(link => {
+        link.addEventListener('click', () => sidebar.classList.remove('open'));
+      });
+    </script>
+
+  </body>
+</html>

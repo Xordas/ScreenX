@@ -1,0 +1,1001 @@
+:root {
+  /* main colors */
+  --Background:         #09090b;
+  --BackgroundSub:     #0f0f12;
+  --Surface:    #141419;
+  --SurfaceTwo:  #1a1a22;
+  --Border:     #23232e;
+  --BorderHighlight:   #2e2e3a;
+
+  /* Text */
+  --Text:       #ececf1;
+  --TextMuted:     #a1a1aa;
+  --TextDim:     #71717a;
+
+  /* Accents */
+  --Accent:     #3b82f6;
+  --AccentHover:   #2563eb;
+  --AccentGlow: rgba(59, 130, 246, 0.15);
+  --Green:      #22c55e;
+  --GreenGlow: rgba(34, 197, 94, 0.15);
+  --Yellow:      #f59e0b;
+  --YellowGlow: rgba(245, 158, 11, 0.15);
+  --Red:        #ef4444;
+  --RedGlow:   rgba(239, 68, 68, 0.15);
+  --Blue:       #3b82f6;
+  --BlueGlow:  rgba(59, 130, 246, 0.15);
+
+  /* Layout */
+  --SidebarWidth:  220px;
+  --TitleBarHeight: 40px;
+  --Radius:     12px;
+  --RadiusSmall:  8px;
+  --RadiusExtraSmall:  6px;
+
+  /* Transitions */
+  --Ease:       cubic-bezier(0.4, 0, 0.2, 1);
+  --Duration:        0.2s;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--Text);
+  background: var(--Background);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  padding-top: var(--TitleBarHeight);  
+}
+
+.Glow {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background:
+    radial-gradient(ellipse 600px 400px at 15% 10%, rgba(59,130,246,0.06), transparent),
+    radial-gradient(ellipse 500px 350px at 85% 80%, rgba(139,92,246,0.04), transparent);
+}
+
+.TitleBar {
+  position: fixed; top: 0; left: 0; right: 0; height: var(--TitleBarHeight);
+  z-index: 12;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 10px 0 16px;
+  background: linear-gradient(180deg, rgba(20,20,25,0.98), rgba(15,15,18,0.92));
+  border-bottom: 1px solid var(--Border);
+  -webkit-app-region: drag;
+  user-select: none; 
+}
+
+.TitleBarLeft {
+  display: flex; align-items: center; gap: 10px;
+  color: var(--TextMuted);
+  font-size: 0.85rem; font-weight: 600;
+}
+
+.TitleBarIcon {
+  width: 22px; height: 22px; border-radius: 6px;
+  background: transparent;
+  border: none;
+  display: grid; place-items: center;
+  overflow: hidden;
+}
+
+.TitleBarIcon img, .Icon img {
+  image-rendering: pixelated;
+  object-fit: contain;
+}
+
+.TitleBarText { letter-spacing: 0.01em; }
+
+.TitleBarControls {
+  display: flex; gap: 4px;
+  -webkit-app-region: no-drag;
+}
+
+.WindowButton {
+  width: 36px; height: 26px; border-radius: 6px;
+  background: transparent; border: 1px solid transparent;
+  color: var(--TextMuted);
+  display: grid; place-items: center;
+  cursor: pointer; transition: all var(--Duration) var(--Ease);
+}
+
+.WindowButton:hover {
+  background: var(--Surface);
+  border-color: var(--Border);
+  color: var(--Text);
+}
+
+.WindowButton.Danger:hover {
+  background: rgba(239,68,68,0.15);
+  border-color: rgba(239,68,68,0.35);
+  color: #f87171;
+}
+
+h1 { font-size: 1.65rem; font-weight: 700; letter-spacing: -0.02em; }
+h2 { font-size: 1.15rem; font-weight: 600; letter-spacing: -0.01em; }
+h3 { font-size: 0.875rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: var(--TextMuted); }
+code { font-family: 'SF Mono', 'Cascadia Code', 'Consolas', monospace; font-size: 0.82em; background: var(--SurfaceTwo); padding: 2px 6px; border-radius: 4px; color: var(--Accent); }
+
+.SideBar {
+  position: fixed; top: var(--TitleBarHeight); left: 0; bottom: 0;
+  width: var(--SidebarWidth);
+  background: var(--BackgroundSub);
+  border-right: 1px solid var(--Border);
+  display: flex; flex-direction: column;
+  z-index: 10;
+  padding: 24px 0; 
+}
+
+.MainArea {
+  margin-left: var(--SidebarWidth);
+  padding: 24px 48px 60px;
+  position: relative; z-index: 1;
+  max-width: 960px;
+}
+
+.SideBarName {
+  display: flex; align-items: center; gap: 10px;
+  padding: 0 20px 28px;
+  border-bottom: 1px solid var(--Border);
+  margin-bottom: 20px;
+}
+
+.Icon {
+  width: 36px; height: 36px; border-radius: 10px;
+  background: transparent;
+  border: none;
+  display: grid; place-items: center;
+  overflow: hidden;
+}
+
+.Name {
+  font-size: 1.05rem; font-weight: 700; letter-spacing: -0.01em;
+}
+
+.SideBarNav {
+  display: flex; flex-direction: column; gap: 2px;
+  padding: 0 12px; flex: 1;
+}
+
+.NavOption {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 12px;
+  border-radius: var(--RadiusSmall);
+  border: none; background: none;
+  color: var(--TextDim);
+  font-size: 0.875rem; font-weight: 500;
+  cursor: pointer;
+  transition: all var(--Duration) var(--Ease);
+  text-align: left; width: 100%;
+  font-family: inherit;
+}
+
+.NavOption:hover {
+  color: var(--TextMuted);
+  background: var(--Surface);
+}
+
+.NavOption.Active {
+  color: var(--Text);
+  background: var(--Surface);
+  box-shadow: inset 3px 0 0 var(--Accent);
+}
+
+.NavOption svg { flex-shrink: 0; opacity: 0.7; }
+.NavOption.Active svg { opacity: 1; color: var(--Accent); }
+
+.SideBarFooter {
+  padding: 16px 20px 0;
+  border-top: 1px solid var(--Border);
+}
+
+.Version {
+  font-size: 0.75rem; color: var(--TextDim); font-weight: 500;
+}
+
+.View {
+  display: flex; flex-direction: column; gap: 20px;
+  animation: ViewIn 0.35s var(--Ease);
+}
+
+.Hidden { display: none !important; }
+
+.ViewHeader { margin-bottom: 4px; }
+.ViewDescription { color: var(--TextMuted); font-size: 0.9rem; margin-top: 4px; }
+
+@keyframes ViewIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.Steps {
+  display: flex; align-items: center; gap: 0;
+  padding: 20px 28px;
+  background: var(--Surface);
+  border: 1px solid var(--Border);
+  border-radius: var(--Radius);
+}
+
+.StepsStep {
+  display: flex; align-items: center; gap: 8px;
+  flex-shrink: 0;
+}
+
+.StepsDot {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--SurfaceTwo);
+  border: 2px solid var(--Border);
+  display: grid; place-items: center;
+  font-size: 0.75rem; font-weight: 700;
+  color: var(--TextDim);
+  transition: all 0.3s var(--Ease);
+}
+
+.StepsLabel {
+  font-size: 0.82rem; font-weight: 500; color: var(--TextDim);
+  transition: color 0.3s var(--Ease);
+}
+
+.StepsStep.Active .StepsDot {
+  background: var(--Accent);
+  border-color: var(--Accent);
+  color: #fff;
+  box-shadow: 0 0 12px var(--AccentGlow);
+}
+
+.StepsStep.Active .StepsLabel { color: var(--Text); }
+
+.StepsStep.Done .StepsDot {
+  background: var(--Green);
+  border-color: var(--Green);
+  color: #fff;
+}
+
+.StepsStep.Done .StepsLabel { color: var(--TextMuted); }
+
+.StepsLine {
+  flex: 1; height: 2px;
+  background: var(--Border);
+  margin: 0 12px;
+  border-radius: 1px;
+  position: relative;
+  overflow: hidden;
+}
+
+.StepsLine.filled {
+  background: var(--Green);
+}
+
+.Card {
+  background: var(--Surface);
+  border: 1px solid var(--Border);
+  border-radius: var(--Radius);
+  padding: 28px 28px 24px;
+  transition: border-color var(--Duration) var(--Ease);
+}
+
+.Card:hover { border-color: var(--BorderHighlight); }
+
+.StepCard { position: relative; }
+
+.CardIcon {
+  width: 44px; height: 44px; border-radius: 12px;
+  display: grid; place-items: center;
+  margin-bottom: 16px;
+}
+
+.CardIcon.CardIconAccentBlue  { background: var(--AccentGlow); color: var(--Accent); border: 1px solid rgba(59,130,246,0.15); }
+.CardIcon.CardAccentYellow { background: var(--YellowGlow);  color: var(--Yellow);  border: 1px solid rgba(245,158,11,0.15); }
+.CardIcon.CardAccentGreen { background: var(--GreenGlow);  color: var(--Green);  border: 1px solid rgba(34,197,94,0.15); }
+
+.CardDescription {
+  color: var(--TextMuted); font-size: 0.9rem; margin-top: 4px; margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.ManualPick {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--Border);
+}
+
+.ManualPanel {
+  display: flex; align-items: flex-end; gap: 12px;
+  margin-top: 12px;
+}
+
+.ManualPanel .Field { flex: 1; }
+
+.Callout {
+  padding: 10px 14px;
+  border-radius: var(--RadiusSmall);
+  border: 1px solid var(--Border);
+  background: var(--SurfaceTwo);
+  color: var(--TextMuted);
+  font-size: 0.82rem;
+  margin: 8px 0 16px;
+}
+
+.Callout.Warning {
+  border-color: rgba(245,158,11,0.25);
+  color: var(--Yellow);
+  background: var(--YellowGlow);
+}
+
+.Callout.Info {
+  border-color: rgba(59,130,246,0.25);
+  color: var(--Accent);
+  background: var(--AccentGlow);
+}
+
+.Alert {
+  padding: 12px 16px;
+  border-radius: var(--RadiusSmall);
+  border: 1px solid var(--Border);
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.Alert.Error {
+  border-color: rgba(239,68,68,0.35);
+  color: var(--Red);
+  background: var(--RedGlow);
+}
+
+.Button {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 9px 18px;
+  border-radius: var(--RadiusSmall);
+  border: 1px solid var(--Border);
+  background: var(--SurfaceTwo);
+  color: var(--Text);
+  font-size: 0.85rem; font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all var(--Duration) var(--Ease);
+  white-space: nowrap;
+  user-select: none;
+}
+
+.Button:hover { border-color: var(--BorderHighlight); background: var(--Border); }
+
+.Button.Primary {
+  background: var(--Accent);
+  border-color: transparent;
+  color: #fff;
+  font-weight: 600;
+}
+
+.Button.Primary:hover { background: var(--AccentHover); }
+.Button.Primary:active { transform: scale(0.97); }
+
+.Button.Ghost {
+  background: transparent;
+  border-color: var(--Border);
+  color: var(--TextMuted);
+}
+
+.Button.Ghost:hover { color: var(--Text); background: var(--SurfaceTwo); }
+
+.Button.Small { padding: 6px 12px; font-size: 0.8rem; }
+
+.Button:disabled { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
+
+.NextButton, .FinishButton { margin-left: auto; }
+
+.BackButton svg { margin-right: 2px; }
+
+.Controlls {
+  display: flex; align-items: center; gap: 12px;
+  margin-top: 16px; flex-wrap: wrap;
+}
+
+.StepFooter {
+  display: flex; justify-content: flex-end;
+  margin-top: 24px; padding-top: 16px;
+  border-top: 1px solid var(--Border);
+}
+
+.StepNav {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-top: 24px; padding-top: 16px;
+  border-top: 1px solid var(--Border);
+}
+
+.StatusIcon {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 14px;
+  border-radius: 100px;
+  font-size: 0.78rem; font-weight: 500;
+  border: 1px solid var(--Border);
+  background: var(--SurfaceTwo);
+  color: var(--TextDim);
+  transition: all 0.3s var(--Ease);
+}
+
+.StatusIcon::before {
+  content: '';
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--TextDim);
+  transition: background 0.3s var(--Ease);
+}
+
+.StatusIcon.Idle::before { background: var(--TextDim); }
+.StatusIcon.Ok   { color: var(--Green);  border-color: rgba(34,197,94,0.2);  background: var(--GreenGlow); }
+.StatusIcon.Ok::before   { background: var(--Green); }
+.StatusIcon.Busy { color: var(--Yellow);  border-color: rgba(245,158,11,0.2); background: var(--YellowGlow); }
+.StatusIcon.Busy::before { background: var(--Yellow); animation: Pulse 1.2s infinite; }
+.StatusIcon.Error  { color: var(--Red);    border-color: rgba(239,68,68,0.2);  background: var(--RedGlow); }
+.StatusIcon.Error::before  { background: var(--Red); }
+
+@keyframes Pulse {
+  0%, 100% { opacity: 1; } 50% { opacity: 0.3; }
+}
+
+.Field {
+  display: flex; flex-direction: column; gap: 6px;
+}
+
+.FieldLabel {
+  font-size: 0.78rem; font-weight: 500; color: var(--TextDim);
+  text-transform: uppercase; letter-spacing: 0.03em;
+}
+
+.Input {
+  background: var(--Background);
+  border: 1px solid var(--Border);
+  color: var(--Text);
+  padding: 9px 12px;
+  border-radius: var(--RadiusExtraSmall);
+  font-size: 0.875rem;
+  font-family: inherit;
+  transition: border-color var(--Duration) var(--Ease), box-shadow var(--Duration) var(--Ease);
+  outline: none;
+  width: 100%;
+}
+
+.Input:focus {
+  border-color: var(--Accent);
+  box-shadow: 0 0 0 3px var(--AccentGlow);
+}
+
+.Input::placeholder { color: var(--TextDim); }
+
+select.Input { cursor: pointer; appearance: none; padding-right: 32px;
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2371717a' stroke-width='2.5' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+}
+
+.FormGrid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 16px; margin-bottom: 4px;
+}
+
+.FormGrid.ColsThree { grid-template-columns: 1fr 1fr 1fr; }
+
+/* Password eye toggle */
+.PasswordWrap {
+  position: relative;
+}
+
+.PasswordWrap .Input { padding-right: 40px; }
+
+.PasswordEye {
+  position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
+  background: none; border: none; cursor: pointer;
+  color: var(--TextDim); padding: 4px;
+  transition: color var(--Duration) var(--Ease);
+}
+
+.PasswordEye:hover { color: var(--TextMuted); }
+
+.FileDrop {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 8px;
+  padding: 32px;
+  border: 2px dashed var(--Border);
+  border-radius: var(--Radius);
+  color: var(--TextDim);
+  text-align: center;
+  transition: all 0.25s var(--Ease);
+  cursor: pointer;
+  margin-bottom: 16px;
+}
+
+.FileDrop:hover, .FileDrop.DragOver {
+  border-color: var(--Accent);
+  background: var(--AccentGlow);
+  color: var(--Accent);
+}
+
+.FileDrop svg { opacity: 0.5; transition: opacity 0.25s; }
+.FileDrop:hover svg { opacity: 1; }
+
+.DropText { font-size: 0.85rem; }
+.FileLink { color: var(--Accent); cursor: pointer; text-decoration: underline; font-weight: 500; }
+.DropName { font-size: 0.8rem; color: var(--Accent); font-weight: 500; min-height: 1.2em; }
+
+.ProgressWrap { margin-top: 12px; }
+
+.ProgressTrack {
+  width: 100%; height: 4px;
+  background: var(--SurfaceTwo);
+  border-radius: 2px; overflow: hidden;
+}
+
+.ProgressFill {
+  width: 40%; height: 100%;
+  background: linear-gradient(90deg, var(--Accent), #818cf8);
+  border-radius: 2px;
+  animation: Indeterminate 1.8s var(--Ease) infinite;
+}
+
+@keyframes Indeterminate {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(350%); }
+}
+
+.Advanced {
+  margin-top: 16px;
+  border-top: 1px solid var(--Border);
+  padding-top: 12px;
+}
+
+.Advanced summary {
+  display: inline-flex; align-items: center; gap: 6px;
+  cursor: pointer; color: var(--TextDim);
+  font-size: 0.8rem; font-weight: 500;
+  list-style: none;
+  transition: color var(--Duration);
+}
+
+.Advanced summary::-webkit-details-marker { display: none; }
+.Advanced summary:hover { color: var(--TextMuted); }
+
+.Advanced[open] summary { margin-bottom: 14px; }
+
+.AdvancedGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+}
+
+.LogCard { padding: 20px 24px 16px; }
+
+.LogHeader {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 12px;
+}
+
+.LogOutput {
+  background: var(--Background);
+  border: 1px solid var(--Border);
+  border-radius: var(--RadiusSmall);
+  padding: 14px 16px;
+  height: 160px;
+  overflow-y: auto;
+  color: var(--TextMuted);
+  font-family: 'SF Mono', 'Cascadia Code', 'Consolas', monospace;
+  font-size: 0.75rem;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.LogOutput::-webkit-scrollbar { width: 5px; }
+.LogOutput::-webkit-scrollbar-track { background: transparent; }
+.LogOutput::-webkit-scrollbar-thumb { background: var(--Border); border-radius: 3px; }
+
+.ConnectionBar {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  flex-wrap: wrap; gap: 16px;
+  padding: 20px 24px;
+}
+
+.ConnectionFields {
+  display: flex; align-items: flex-end; gap: 14px;
+  flex-wrap: wrap;
+}
+
+.Field.Compact { min-width: 110px; }
+.Field.Compact .Input { padding: 7px 10px; font-size: 0.82rem; }
+
+.ConnectionActions {
+  display: flex; align-items: center; gap: 8px;
+}
+
+.ToggleRow {
+  display: flex; align-items: center; gap: 10px;
+  padding-bottom: 2px;
+}
+
+.ToggleText { font-size: 0.82rem; color: var(--TextMuted); }
+
+.ToggleSwitch {
+  position: relative;
+  width: 38px; height: 20px;
+  display: inline-block;
+}
+
+.ToggleSwitch input { opacity: 0; width: 0; height: 0; position: absolute; }
+
+.ToggleTrack {
+  position: absolute; inset: 0;
+  background: var(--SurfaceTwo);
+  border: 1px solid var(--Border);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.25s var(--Ease);
+}
+
+.ToggleTrack::after {
+  content: '';
+  position: absolute; top: 2px; left: 2px;
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--TextDim);
+  transition: all 0.25s var(--Ease);
+}
+
+.ToggleSwitch input:checked + .ToggleTrack {
+  background: var(--Accent);
+  border-color: var(--Accent);
+}
+
+.ToggleSwitch input:checked + .ToggleTrack::after {
+  transform: translateX(18px);
+  background: #fff;
+}
+
+.OledCard {
+  padding: 20px 24px;
+}
+
+.OledHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.OledResolution {
+  font-size: 0.72rem;
+  color: var(--TextDim);
+  font-family: 'SF Mono', 'Cascadia Code', 'Consolas', monospace;
+  letter-spacing: 0.03em;
+}
+
+.OledBezel {
+  background: #050508;
+  border: 2px solid #1c1c28;
+  border-radius: 10px;
+  padding: 14px 16px;
+  display: flex;
+  justify-content: center;
+  box-shadow:
+    inset 0 2px 12px rgba(0, 0, 0, 0.6),
+    0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+#OledCanvas,
+#LayoutCanvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+
+.DashGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.DashCard {
+  background: var(--Surface);
+  border: 1px solid var(--Border);
+  border-radius: var(--Radius);
+  padding: 18px 20px;
+  display: flex; flex-direction: column; gap: 4px;
+  position: relative;
+  transition: border-color var(--Duration) var(--Ease);
+}
+
+.DashCard:hover {  border-color: var(--BorderHighlight); }
+
+.DashCard.DashHidden { display: none; }
+
+.DashLabel {
+  font-size: 0.72rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.06em;
+  color: var(--TextDim);
+}
+
+.DashValue {
+  font-size: 1.35rem; font-weight: 700; letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.DashUnit {
+  font-size: 0.72rem; font-weight: 500;
+  color: var(--TextDim);
+  margin-top: -2px;
+}
+
+.DashBig {
+  font-size: 3.5rem; font-weight: 800; letter-spacing: -0.04em;
+  line-height: 1;
+  background: linear-gradient(135deg, var(--Text), var(--TextMuted));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.GearCard {
+  grid-row: span 2;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  background: linear-gradient(135deg, var(--Surface), var(--SurfaceTwo));
+}
+
+.BarCard { gap: 8px; }
+
+.DashBarRow {
+  display: flex; align-items: center; gap: 10px;
+}
+
+.DashBarTrack {
+  flex: 1; height: 8px;
+  background: var(--Background);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.DashBarFill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.15s var(--Ease);
+}
+
+.ThrottleFill { background: var(--Green); }
+.BrakeFill    { background: var(--Red); }
+.ClutchFill   { background: var(--Blue, #3b82f6); }
+.FuelFill     { background: var(--Yellow); }
+
+.DashBarPercent {
+  font-size: 0.82rem; font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--TextMuted);
+  min-width: 42px; text-align: right;
+}
+
+.DashDot {
+  position: absolute; top: 18px; right: 18px;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--TextDim);
+  opacity: 0.4;
+  transition: all 0.3s var(--Ease);
+}
+
+.DashDot.On {
+  background: var(--Green);
+  opacity: 1;
+  box-shadow: 0 0 8px var(--GreenGlow);
+}
+
+.DashDot.Warn {
+  background: var(--Yellow);
+  opacity: 1;
+  box-shadow: 0 0 8px var(--YellowGlow);
+}
+
+.TireCard {
+  grid-column: span 3;
+}
+
+.TireGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.Tire {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 14px;
+  background: var(--Background);
+  border: 1px solid var(--Border);
+  border-radius: var(--RadiusSmall);
+  transition: border-color 0.3s var(--Ease);
+}
+
+.TirePosition {
+  font-size: 0.72rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.06em;
+  color: var(--TextDim);
+}
+
+.TirePercent {
+  font-size: 1rem; font-weight: 700; font-variant-numeric: tabular-nums;
+}
+
+.Tire.Good  { border-color: rgba(34,197,94,0.3); }
+.Tire.Warn  { border-color: rgba(245,158,11,0.3); }
+.Tire.Bad   { border-color: rgba(239,68,68,0.3); }
+
+.Tire.Good .TirePercent  { color: var(--Green); }
+.Tire.Warn .TirePercent  { color: var(--Yellow); }
+.Tire.Bad  .TirePercent  { color: var(--Red); }
+
+.Alerts {
+  position: fixed; bottom: 24px; right: 24px;
+  display: flex; flex-direction: column-reverse; gap: 8px;
+  z-index: 999;
+  pointer-events: none;
+}
+
+.Alert {
+  padding: 12px 20px;
+  border-radius: var(--RadiusSmall);
+  font-size: 0.82rem; font-weight: 500;
+  color: var(--Text);
+  background: var(--SurfaceTwo);
+  border: 1px solid var(--Border);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+  animation: AlertIn 0.35s var(--Ease);
+  pointer-events: auto;
+}
+
+.Alert.Success { border-color: rgba(34,197,94,0.3); color: var(--Green); }
+.Alert.Error   { border-color: rgba(239,68,68,0.3); color: var(--Red); }
+
+@keyframes AlertIn {
+  from { opacity: 0; transform: translateY(12px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes AlertOut {
+  to { opacity: 0; transform: translateY(-8px) scale(0.96); }
+}
+
+.LayoutNotice {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 16px;
+  background: rgba(245, 158, 11, 0.06);
+  border: 1px solid rgba(245, 158, 11, 0.18);
+  border-radius: var(--RadiusSmall);
+  margin-bottom: 16px;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--TextMuted);
+}
+
+.LayoutNotice svg {
+  flex-shrink: 0;
+  margin-top: 1px;
+  color: rgb(245, 158, 11);
+}
+
+.ZoneLabels {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--TextDim);
+}
+
+.ZoneLabelsMid {
+  color: var(--Accent);
+}
+
+.ZoneGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.ZoneCard {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.ZoneHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ZoneBadge {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  background: var(--SurfaceTwo);
+  border: 1px solid var(--Border);
+  display: grid; place-items: center;
+  font-size: 0.8rem; font-weight: 700;
+  color: var(--TextDim);
+  flex-shrink: 0;
+}
+
+.ZoneBadge.Accent {
+  background: var(--AccentGlow);
+  border-color: rgba(59,130,246,0.2);
+  color: var(--Accent);
+}
+
+.ZoneDescription {
+  font-size: 0.72rem;
+  color: var(--TextDim);
+  margin-top: 2px;
+  font-family: 'SF Mono', 'Cascadia Code', 'Consolas', monospace;
+}
+
+.ZoneSelect {
+  font-size: 0.82rem;
+}
+
+.PresetCard {
+  padding: 20px 24px;
+}
+
+.PresetHeader {
+  margin-bottom: 14px;
+}
+
+.PresetRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.PresetRow:last-child {
+  margin-bottom: 0;
+}
+
+.PresetSelect {
+  flex: 1;
+}
+
+.PresetRow .Input {
+  flex: 1;
+}
+
+.Hint {
+  font-size: 0.78rem;
+  color: var(--TextDim);
+  margin-top: 10px;
+}
+
+@media (max-width: 800px) {
+  :root { --SidebarWidth: 64px; }
+  .Name, .NavOption span, .StepsLabel { display: none; }
+  .SideBarName { justify-content: center; padding: 0 8px 20px; }
+  .SideBarNav { padding: 0 8px; }
+  .NavOption { justify-content: center; padding: 10px; }
+  .MainArea { padding: 28px 20px 40px; }
+  .DashGrid { grid-template-columns: 1fr 1fr; }
+  .GearCard { grid-row: span 1; }
+  .TireCard { grid-column: span 2; }
+  .FormGrid { grid-template-columns: 1fr; }
+  .ConnectionBar { flex-direction: column; align-items: stretch; }
+  .ZoneGrid { grid-template-columns: 1fr; }
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--Border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--BorderHighlight); }
+
+::selection { background: var(--AccentGlow); color: var(--Text); }
+
+
+

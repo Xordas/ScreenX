@@ -1,0 +1,9 @@
+companion/build
+companion/dist
+old_versions
+compiled-firmware
+companion/companion_state.json
+companion/layout_presets.json
+firmware_latest.bin
+docs/layout.md
+
