@@ -2,6 +2,9 @@
 
 ScreenX is a DIY telemetry display for the Moza ES Lite wheel. It streams Assetto Corsa data over WiFi to an ESP32 + 2.08" OLED mounted on your wheel, powered by a desktop companion app.
 
+### Click this photo to view a example video of the project in action!
+[![Example video](assets/example-pic.jpg)](assets/example-vid.mp4)
+
 ## Table of Contents
 - [ESP32 Firmware](firmware/README.md)
 - [Docs](docs/README.md)
